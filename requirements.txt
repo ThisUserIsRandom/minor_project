@@ -1,0 +1,5 @@
+Flask
+bs4
+mysql-connector
+google.generativeai
+flask_cors

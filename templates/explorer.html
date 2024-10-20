@@ -1,0 +1,12 @@
+{% extends 'nav.html' %}
+
+
+<link rel="stylesheet" href="{{url_for('static',filename='dist/css/output.css')}}">
+<script src="{{url_for('static',filename='flowbite.min.js')}}"></script>
+
+
+{% block content %}
+
+{{ text }}
+
+{% endblock %}
