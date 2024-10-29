@@ -101,9 +101,9 @@
 		</style>
   </head>
     
-<body id="FullBody">
+<body>
 
-<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mx-4 mt-8">
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mx-4 mt-8" id="remove">
 
 {% for datum in data %}
   <div class="bg-card text-card-foreground rounded-lg shadow-lg overflow-hidden">
@@ -112,10 +112,10 @@
       <h2 class="text-lg font-bold mb-2">{{datum[0]}}</h2>
       <p class="text-sm text-muted-foreground mb-4">Card Description goes here. It can be a long description to test the responsiveness.</p>
       <script>
-			function bring_interest(){
+			function bring_interest(interests){
 				key = {{ key|tojson }}
-				interest = {{datum[0]|tojson}}
-				const data_recerived_from_server_api=fetch('http://127.0.0.1:5000'+'/'+{{ key|tojson }}+'/'+{{datum[0]|tojson}}, {
+				interest = interests
+				const data_recerived_from_server_api=fetch('http://127.0.0.1:5000'+'/'+{{ key|tojson }}+'/'+interest, {
                 method: 'GET',
                 headers: {
                 'Accept': 'application/json',
@@ -124,12 +124,12 @@
             })
 			.then(response => response.json())
    			.then(response =>  document.getElementById('FullBody').innerHTML = JSON.stringify(response['returned']).replace('href=\\','href=')) // console.log(JSON.stringify(response))
-
+			document.getElementById('remove').innerHTML = ''
 			//  window.location.assign('http://127.0.0.1:5000'+'/'+{{ key|tojson }}+'/'+{{datum[0]|tojson}})
 			// alert('/'+key+'/'+interest)
 			} 
 	  </script>
-	  <button onclick='bring_interest()' class="bg-primary text-primary-foreground px-4 py-2 rounded-md hover:bg-primary/80">Explore</button>
+	  <button onclick='bring_interest({{datum[0]|tojson}})' class="bg-primary text-primary-foreground px-4 py-2 rounded-md hover:bg-primary/80">Explore</button>
       <script>
         function remove_this(interestes){
             username = {{username|tojson}};
@@ -153,6 +153,6 @@
   </div>
   {% endfor %}
 </div>
+<div id="FullBody"></div>
 </body>
  {% endblock %}
-

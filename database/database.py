@@ -1,12 +1,23 @@
 import mysql.connector
 from datetime import datetime
+import configparser
+
+config = configparser.RawConfigParser()
+config.read('./database.conf')
+
+database_section = config.sections()[0]
+
+host = config.get(database_section,'host')
+user = config.get(database_section,'user')
+password = config.get(database_section,'password')
+database = config.get(database_section,'database')
 
 def insert_data(user,password,email,api,path):
     mydb = mysql.connector.connect(
-    host="localhost",
-    user="root",
-    password="root",
-    database="hobbists"
+    host=host,
+    user=user,
+    password=password,
+    database=database
     )
 
     mycursor = mydb.cursor()
@@ -21,10 +32,10 @@ def insert_data(user,password,email,api,path):
 
 def reterieve_username(username):
     mydb = mysql.connector.connect(
-        host="localhost",
-        user="root",
-        password="root",
-        database="hobbists"
+        host=host,
+        user=user,
+        password=password,
+        database=database
     )
 
     mycursor = mydb.cursor()
@@ -39,10 +50,10 @@ def reterieve_username(username):
 
 def create_interest_database_for_user(username):
     mydb = mysql.connector.connect(
-        host="localhost",
-        user="root",
-        password="root",
-        database="hobbists"
+        host=host,
+        user=user,
+        password=password,
+        database=database
     )
 
     mycursor = mydb.cursor()
@@ -52,10 +63,10 @@ def create_interest_database_for_user(username):
 
 def new_interest(username,value):
     mydb = mysql.connector.connect(
-        host="localhost",
-        user="root",
-        password="root",
-        database="hobbists"
+        host=host,
+        user=user,
+        password=password,
+        database=database
     )
 
     mycursor = mydb.cursor()
@@ -67,10 +78,10 @@ def new_interest(username,value):
 
 def find_interests(username):
     mydb = mysql.connector.connect(
-        host="localhost",
-        user="root",
-        password="root",
-        database="hobbists"
+        host=host,
+        user=user,
+        password=password,
+        database=database
     ) 
 
     mycursor = mydb.cursor()
@@ -83,10 +94,10 @@ def find_interests(username):
 
 def delete_interest(username,interest):
     mydb = mysql.connector.connect(
-        host="localhost",
-        user="root",
-        password="root",
-        database="hobbists"
+        host=host,
+        user=user,
+        password=password,
+        database=database
     ) 
 
     mycursor = mydb.cursor()
